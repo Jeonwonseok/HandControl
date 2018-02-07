@@ -1,0 +1,305 @@
+<mujoco model="hand">
+    <compiler eulerseq="xzy"/>
+
+    <default>
+        <geom rgba="0.9 0.5 0.3 0.7"/>
+        <site type="sphere" rgba=".1 .9 .9 1" size="0.002"/>
+    </default>
+
+    <option gravity="0 0 0"/>
+
+    <worldbody>
+        <light diffuse=".5 .5 .5" pos="0 0 3" dir="0 0 -1"/>
+        <geom type="plane" size="1 1 0.1" rgba="0 0 0 1"/>
+
+        <body name="box" pos="0 0 0.02">
+            <geom type="box" size="0.01 0.01 0.01"/>
+            <!--<freejoint name="box"/>-->
+            <!--<joint type="slide" pos="0 0 0" axis="0 0 1" limited="false"/>-->
+            <site name="s0" pos="0 -0.01 0"/>
+        </body>
+
+        <body name="wrist" pos="0 0 0.05">
+            <!--<joint type="ball"/>-->
+            <geom name="w" type="capsule" fromto="-0.005 0 0 0.005 0 0" size="0.01" rgba="0.2 .7 0.3 0.5"/>
+            <geom name="i1" type="capsule" fromto="0.015 0 0 0.03 0 0.075" size="0.008" rgba="0.2 .7 0.3 0.5"/>
+            <geom name="m1" type="capsule" fromto="0.005 0 0 0.01 0 0.075" size="0.008" rgba="0.2 .7 0.3 0.5"/>
+            <geom name="r1" type="capsule" fromto="-0.005 0 0 -0.01 0 0.07" size="0.008" rgba="0.2 .7 0.3 0.5"/>
+            <geom name="p1" type="capsule" fromto="-0.01 0 0 -0.03 0 0.06" size="0.008" rgba="0.2 .7 0.3 0.5"/>
+
+            <site name="ms1" pos="0.004 -0.01 0.005"/>
+            <site name="ms2" pos="0.009 -0.01 0.062"/>
+            <site name="ms10" pos="0.001 0 0.075"/>
+            <site name="ms11" pos="0.019 0 0.075"/>
+
+            <site name="is1" pos="0.015 -0.01 0.005"/>
+            <site name="is2" pos="0.027 -0.01 0.06"/>
+            <site name="is10" pos="0.022 0 0.077"/>
+            <site name="is11" pos="0.038 0 0.074"/>
+
+            <site name="rps1" pos="-0.0075 -0.01 0.005"/>
+            <site name="rps2" pos="-0.012 -0.01 0.035"/>
+            <site name="rps3" pos="-0.006 -0.01 0.037"/>
+            <site name="rs2" pos="-0.0084 -0.01 0.06"/>
+            <site name="ps2" pos="-0.025 -0.01 0.055"/>
+            <site name="rs9" pos="-0.001 0 0.07"/>
+            <site name="ps9" pos="-0.021 0 0.06"/>
+
+            <body name="thumb_meta" pos="0.03 -0.015 0" euler="30.8542 30.3947 56.2667">
+            <!--<body name="thumb_meta" pos="0.03 -0.015 0" euler="30.8542 30.3947 -56.2667">-->
+                <!--<body name="thumb_meta" pos="0.03 -0.02 0.0125" euler="-30.8542 -30.3947 56.2667">-->
+                <geom type="capsule" fromto="0 0 0 0 0 0.04" size="0.008"/>
+                <joint name="thumb_aa" type="hinge" axis="0 1 0" limited="true" range="-40 40" springdamper="0.1 0.75"/>
+                <joint name="thumb_fe_1" type="hinge" axis="1 0 0" limited="true" range="-40 30" springdamper="0.1 0.75"/>
+                <site name="ts1" pos="-0.01 0 0.01"/>
+                <site name="ts2" pos="-0.01 0 0.03"/>
+                <site name="ts6" pos="0 0.009 0.03"/>
+
+                <body name="thumb_prox" pos="0 0 0.04" euler="-11.8527 -2.3977 4.4833">
+                <!--<body name="thumb_prox" pos="0 0 0.04" euler="-11.8527 -2.3977 -4.4833">-->
+                    <geom type="capsule" fromto="0 0 0 0 0 0.03" size="0.007"/>
+                    <joint name="thumb_fe_2" type="hinge" axis="0 1 0" limited="true" range="-90 0" springdamper="0.1 0.75"/>
+                    <site name="ts3" pos="-0.01 0 0.01"/>
+                    <site name="ts4" pos="-0.01 0 0.02"/>
+
+                    <body name="thumb_dist" pos="0 0 0.03" euler="0 2.9994 0">
+                        <geom type="capsule" fromto="0 0 0 0 0 0.025" size="0.007"/>
+                        <joint name="thumb_fe_3" type="hinge" axis="0 1 0" limited="true" range="-90 20" springdamper="0.1 0.75"/>
+                        <site name="ts5" pos="-0.01 0 0.01"/>
+                    </body>
+                </body>
+            </body>
+
+            <!--<body name="index_prox" pos="0.03 0 0.075" euler="-1.2195 -0.6775 -7.9079">-->
+            <body name="index_prox" pos="0.03 0 0.075" euler="-5.3211 0.0509 9.7921">
+                <geom type="capsule" fromto="0 0 0 0 0 0.045" size="0.006"/>
+                <joint name="index_aa" type="hinge" axis="0 1 0" limited="true" range="-20 30" springdamper="0.1 0.75"/>
+                <joint name="index_fe_1" type="hinge" axis="1 0 0" limited="true" range="-20 90" springdamper="0.1 0.75"/>
+
+                <site name="is3" pos="0 -0.01 0.014"/>
+                <site name="is4" pos="0 -0.01 0.035"/>
+                <site name="is8" pos="-0.007 0 0.014"/>
+                <site name="is9" pos="0.007 0 0.014"/>
+
+                <body name="index_mid" pos="0 0 0.045" euler="4.1656 -0.0207 -1.8625">
+                    <geom type="capsule" fromto="0 0 0 0 0 0.03" size="0.0055"/>
+                    <joint name="index_fe_2" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+
+                    <site name="is5" pos="0 -0.01 0.01"/>
+                    <site name="is6" pos="0 -0.01 0.02"/>
+
+                    <body name="index_dist" pos="0 0 0.03">
+                        <geom type="capsule" fromto="0 0 0 0 0 0.02" size="0.005"/>
+                        <joint name="index_fe_3" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+
+                        <site name="is7" pos="0 -0.01 0.01"/>
+                    </body>
+                </body>
+            </body>
+
+            <body name="mid_prox" pos="0.01 0 0.075" euler="-10.3552 -1.0169 -1.3986">
+                <geom type="capsule" fromto="0 0 0 0 0 0.05" size="0.006"/>
+                <joint name="mid_aa" type="hinge" axis="0 1 0" limited="true" range="-30 30" springdamper="0.1 0.75"/>
+                <joint name="mid_fe_1" type="hinge" axis="1 0 0" limited="true" range="-20 90" springdamper="0.1 0.75"/>
+                <site name="ms3" pos="0 -0.01 0.015"/>
+                <site name="ms4" pos="0 -0.01 0.04"/>
+                <site name="ms8" pos="-0.007 0 0.014"/>
+                <site name="ms9" pos="0.007 0 0.014"/>
+
+                <body name="mid_mid" pos="0 0 0.05" euler="6.8031 -0.0003 -0.0065">
+                    <geom type="capsule" fromto="0 0 0 0 0 0.033" size="0.0055"/>
+                    <joint name="mid_fe_2" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+                    <site name="ms5" pos="0 -0.01 0.008"/>
+                    <site name="ms6" pos="0 -0.01 0.024"/>
+
+                    <body name="mid_dist" pos="0 0 0.033">
+                        <geom type="capsule" fromto="0 0 0 0 0 0.022" size="0.005"/>
+                        <joint name="mid_fe_3" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+                        <site name="ms7" pos="0 -0.01 0.01"/>
+                    </body>
+                </body>
+            </body>
+
+            <body name="ring_prox" pos="-0.01 0 0.07" euler="-2.2338 -1.1406 -12.8569">
+                <geom type="capsule" fromto="0 0 0 0 0 0.047" size="0.006"/>
+                <joint name="ring_aa" type="hinge" axis="0 1 0" limited="true" range="-30 30" springdamper="0.1 0.75"/>
+                <joint name="ring_fe_1" type="hinge" axis="1 0 0" limited="true" range="-20 90" springdamper="0.1 0.75"/>
+                <site name="rs3" pos="0 -0.01 0.016"/>
+                <site name="rs4" pos="0 -0.01 0.038"/>
+                <site name="rs8" pos="0.007 0 0.014"/>
+
+                <body name="ring_mid" pos="0 0 0.047" euler="-1.2933 -0.0098 -0.1873">
+                    <geom type="capsule" fromto="0 0 0 0 0 0.031" size="0.0055"/>
+                    <joint name="ring_fe_2" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+                    <site name="rs5" pos="0 -0.01 0.01"/>
+                    <site name="rs6" pos="0 -0.01 0.023"/>
+
+                    <body name="ring_dist" pos="0 0 0.031" euler="-0.1681 -0.1287 -2.338">
+                        <geom type="capsule" fromto="0 0 0 0 0 0.022" size="0.005"/>
+                        <joint name="ring_fe_3" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+                        <site name="rs7" pos="0 -0.01 0.008"/>
+                    </body>
+                </body>
+            </body>
+
+            <!--<body name="pinky_prox" pos="-0.03 0 0.06" euler="3.3575 0.9524 23.5002">-->
+            <body name="pinky_prox" pos="-0.03 0 0.06" euler="2.4076 0.7085 -26.7040">
+                <geom type="capsule" fromto="0 0 0 0 0 0.04" size="0.006"/>
+                <joint name="pinky_aa" type="hinge" axis="0 1 0" limited="true" range="-10 20" springdamper="0.1 0.75"/>
+                <joint name="pinky_fe_1" type="hinge" axis="1 0 0" limited="true" range="-20 90" springdamper="0.1 0.75"/>
+                <site name="ps3" pos="0 -0.01 0.017"/>
+                <site name="ps4" pos="0 -0.01 0.033"/>
+                <site name="ps8" pos="0.007 0 0.014"/>
+
+                <body name="pinky_mid" pos="0 0 0.04" euler="1.0196 -0.2397 3.1869">
+                    <geom type="capsule" fromto="0 0 0 0 0 0.025" size="0.0055"/>
+                    <joint name="pinky_fe_2" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+                    <site name="ps5" pos="0 -0.01 0.012"/>
+                    <site name="ps6" pos="0 -0.01 0.019"/>
+
+                    <body name="pinky_dist" pos="0 0 0.025" euler="-3.2335 -0.0021 0.1339">
+                        <geom type="capsule" fromto="0 0 0 0 0 0.018" size="0.005"/>
+                        <joint name="pinky_fe_3" type="hinge" axis="1 0 0" limited="true" range="0 90" springdamper="0.1 0.75"/>
+                        <site name="ps7" pos="0 -0.01 0.008"/>
+                    </body>
+                </body>
+            </body>
+        </body>
+    </worldbody>
+
+    <tendon>
+        <spatial name="thumb_flex_dis" width="0.001" rgba=".9 0.9 0.9 1" limited="true" range="-0.05 0.33">
+            <site site="ts5"/>
+            <site site="ts4"/>
+            <site site="ts3"/>
+            <site site="ts2"/>
+            <site site="ts1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="thumb_opp" width="0.001" rgba=".9 0.9 0.2 1" limited="true" range="-0.05 0.33">
+            <site site="ts6"/>
+            <site site="ms1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="index_flex_dis" width="0.001" rgba=".9 .9 .9 1" limited="true" range="-0.05 0.33">
+            <site site="is7"/>
+            <site site="is6"/>
+            <site site="is5"/>
+            <site site="is4"/>
+            <site site="is3"/>
+            <site site="is2"/>
+            <site site="is1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="index_flex_mid" width="0.001" rgba=".9 0 0 1" limited="true" range="-0.05 0.33">
+            <site site="is5"/>
+            <site site="is4"/>
+            <site site="is3"/>
+            <site site="is2"/>
+            <site site="is1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="index_L" width="0.001" rgba=".9 0.9 0.2 1" limited="true" range="-0.05 0.33">
+            <site site="is9"/>
+            <site site="is11"/>
+            <site site="is1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="index_R" width="0.001" rgba=".9 0.9 0.2 1" limited="true" range="-0.05 0.33">
+            <site site="is8"/>
+            <site site="is10"/>
+            <site site="is1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="mid_flex_dis" width="0.001" rgba=".9 .9 .9 1" limited="true" range="-0.05 0.33">
+            <site site="ms7"/>
+            <site site="ms6"/>
+            <site site="ms5"/>
+            <site site="ms4"/>
+            <site site="ms3"/>
+            <site site="ms2"/>
+            <site site="ms1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="mid_flex_mid" width="0.001" rgba=".9 0 0 1" limited="true" range="-0.05 0.33">
+            <site site="ms5"/>
+            <site site="ms4"/>
+            <site site="ms3"/>
+            <site site="ms2"/>
+            <site site="ms1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="mid_L" width="0.001" rgba=".9 0.9 0.2 1" limited="true" range="-0.05 0.33">
+            <site site="ms9"/>
+            <site site="ms11"/>
+            <site site="ms1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="mid_R" width="0.001" rgba=".9 0.9 0.2 1" limited="true" range="-0.05 0.33">
+            <site site="ms8"/>
+            <site site="ms10"/>
+            <site site="ms1"/>
+            <site site="s0"/>
+        </spatial>
+
+        <spatial name="rp_flex_dis" width="0.001" rgba=".9 .9 .9 1" limited="true" range="-0.05 0.33">
+            <site site="s0"/>
+            <site site="rps1"/>
+            <site site="rps2"/>
+            <pulley divisor="2"/>
+            <site site="rps2"/>
+            <site site="rs2"/>
+            <site site="rs3"/>
+            <site site="rs4"/>
+            <site site="rs5"/>
+            <site site="rs6"/>
+            <site site="rs7"/>
+            <pulley divisor="2"/>
+            <site site="rps2"/>
+            <site site="ps2"/>
+            <site site="ps3"/>
+            <site site="ps4"/>
+            <site site="ps5"/>
+            <site site="ps6"/>
+            <site site="ps7"/>
+        </spatial>
+
+        <spatial name="rp_L" width="0.001" rgba=".9 .9 .2 1" limited="true" range="-0.05 0.33">
+            <site site="s0"/>
+            <site site="rps1"/>
+            <site site="rps3"/>
+            <pulley divisor="2"/>
+            <site site="rps3"/>
+            <site site="rs9"/>
+            <site site="rs8"/>
+            <pulley divisor="2"/>
+            <site site="rps3"/>
+            <site site="ps9"/>
+            <site site="ps8"/>
+        </spatial>
+    </tendon>
+
+     <actuator>
+         <motor name='thumb_flex_dis' tendon='thumb_flex_dis' />
+         <motor name='thumb_opp' tendon='thumb_opp' />
+         <motor name='index_flex_dis' tendon='index_flex_dis' />
+         <motor name='index_flex_mid' tendon='index_flex_mid' />
+         <motor name='index_L' tendon='index_L' />
+         <motor name='index_R' tendon='index_R' />
+         <motor name='mid_flex_dis' tendon='mid_flex_dis' />
+         <motor name='mid_flex_mid' tendon='mid_flex_mid' />
+         <motor name='mid_L' tendon='mid_L' />
+         <motor name='mid_R' tendon='mid_R' />
+         <motor name='rp_flex_dis' tendon='rp_flex_dis' />
+         <motor name='rp_L' tendon='rp_L' />
+    </actuator>
+</mujoco>
